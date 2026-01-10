@@ -345,24 +345,42 @@ const LoggerEntryPoint: EntryPoint = {
 
 ### Open/Closed Principle (OCP)
 
-Applications are open for extension (add new entry points) but closed for modification (existing entry points remain unchanged).
+Interfaces are open for extension but closed for modification. Existing interfaces remain unchanged, but can be extended by deriving new interfaces and contributing them under new names.
 
 ```typescript
-// Add new functionality without modifying existing code
-orchestrator.addEntryPoints([
-  ExistingEntryPoint1,
-  ExistingEntryPoint2,
-  NewFeatureEntryPoint,  // Extend without modification
-]);
+// Original interface remains unchanged
+interface LoggerAPI {
+  log(message: string): void;
+}
+
+// Extend by creating a new interface
+interface EnhancedLoggerAPI extends LoggerAPI {
+  logWithLevel(level: string, message: string): void;
+  getHistory(): string[];
+}
+
+// Contribute the enhanced interface under a new name
+const EnhancedLoggerKey: SlotKey<EnhancedLoggerAPI> = { name: 'EnhancedLogger' };
+
+// New entry points can depend on the enhanced interface
+const NewFeatureEntryPoint: EntryPoint = {
+  name: 'New Feature',
+  dependsOn: [EnhancedLoggerKey],  // Uses extended interface
+  run(shell) {
+    const logger = shell.get(EnhancedLoggerKey);
+    logger.logWithLevel('INFO', 'Using enhanced functionality');
+  },
+};
 ```
 
 ### Liskov Substitution Principle (LSP)
 
-Entry points depend on interfaces (`SlotKey`), so implementations can be substituted without breaking consumers.
+Entry points depend on interfaces (`SlotKey`), so implementations can be substituted without breaking consumers. Substitution is achieved by simply replacing one entry point with another in the `addEntryPoints` call.
 
 ```typescript
 // Both implementations satisfy the same interface
 const ConsoleLoggerEntryPoint: EntryPoint = {
+  name: 'Console Logger',
   contributes: [LoggerAPI],
   contribute(shell) {
     shell.contribute(LoggerAPI, () => ({
@@ -372,6 +390,7 @@ const ConsoleLoggerEntryPoint: EntryPoint = {
 };
 
 const FileLoggerEntryPoint: EntryPoint = {
+  name: 'File Logger',
   contributes: [LoggerAPI],
   contribute(shell) {
     shell.contribute(LoggerAPI, () => ({
@@ -380,8 +399,12 @@ const FileLoggerEntryPoint: EntryPoint = {
   },
 };
 
-// Consumers work with either implementation
-```
+// Substitute implementations by changing which entry point is added
+orchestrator.addEntryPoints([
+  ConsoleLoggerEntryPoint,  // Use console logger
+  // FileLoggerEntryPoint,  // Or use file logger instead
+  ApplicationEntryPoint,     // Consumer works with either
+]);
 
 ### Interface Segregation Principle (ISP)
 
