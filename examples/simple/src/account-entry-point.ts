@@ -1,4 +1,4 @@
-import { EntryPoint } from 'modject';
+import type { EntryPoint } from 'modject';
 import { AccountAPI } from './account';
 
 export const AccountEntryPoint: EntryPoint = {

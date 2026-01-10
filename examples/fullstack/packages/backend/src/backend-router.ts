@@ -1,5 +1,5 @@
-import { SlotKey } from 'modject';
-import { Request, Response, Router } from 'express';
+import type { Request, Response, Router } from 'express';
+import type { SlotKey } from 'modject';
 
 export type RouteHandler = (req: Request, res: Response) => void | Promise<void>;
 

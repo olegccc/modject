@@ -1,5 +1,5 @@
 import { createOrchestrator } from '../src/orchestrator';
-import type { ContributeApi, EntryPoint, RunApi, SlotKey, WithdrawApi } from '../src/types';
+import type { ContributeApi, EntryPoint, SlotKey, WithdrawApi } from '../src/types';
 
 describe('Orchestrator', () => {
   describe('addEntryPoints', () => {
@@ -267,7 +267,7 @@ describe('Orchestrator', () => {
       const orchestrator = createOrchestrator();
       const slot: SlotKey<{ count: number }> = { name: 'slot1' };
       let callCount = 0;
-      const values: any[] = [];
+      const values: { count: number }[] = [];
 
       orchestrator.addEntryPoints([
         {

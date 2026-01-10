@@ -1,6 +1,6 @@
-import { EntryPoint } from 'modject';
-import { DatabaseAPI } from './database';
+import type { EntryPoint } from 'modject';
 import { BackendRouterAPI } from './backend-router';
+import { DatabaseAPI } from './database';
 
 export const ArticlesControllerEntryPoint: EntryPoint = {
   name: 'Articles Controller Entry Point',
@@ -10,7 +10,7 @@ export const ArticlesControllerEntryPoint: EntryPoint = {
     const database = shell.get(DatabaseAPI);
     const router = shell.get(BackendRouterAPI);
 
-    router.registerRoute('get', '/api/articles', (req, res) => {
+    router.registerRoute('get', '/api/articles', (_req, res) => {
       const articles = database.getArticles();
       res.json(articles);
     });

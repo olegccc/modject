@@ -1,4 +1,4 @@
-import { SlotKey } from 'modject';
+import type { SlotKey } from 'modject';
 
 export interface RenderAPI {
   render(): void;

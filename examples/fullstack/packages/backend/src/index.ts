@@ -1,10 +1,10 @@
 import { createOrchestrator } from 'modject';
-import { DatabaseEntryPoint } from './database-entry-point';
-import { BackendRouterEntryPoint } from './backend-router-entry-point';
-import { SearchControllerEntryPoint } from './search-controller-entry-point';
 import { ArticlesControllerEntryPoint } from './articles-controller-entry-point';
-import { ServerEntryPoint } from './server-entry-point';
+import { BackendRouterEntryPoint } from './backend-router-entry-point';
+import { DatabaseEntryPoint } from './database-entry-point';
+import { SearchControllerEntryPoint } from './search-controller-entry-point';
 import { ServerAPI } from './server';
+import { ServerEntryPoint } from './server-entry-point';
 
 const orchestrator = createOrchestrator();
 

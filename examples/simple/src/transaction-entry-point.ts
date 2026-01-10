@@ -1,5 +1,5 @@
-import { EntryPoint } from 'modject';
-import { Transaction, TransactionAPI } from './transaction';
+import type { EntryPoint } from 'modject';
+import { type Transaction, TransactionAPI } from './transaction';
 
 export const TransactionEntryPoint: EntryPoint = {
   name: 'Transaction Entry Point',

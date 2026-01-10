@@ -1,6 +1,6 @@
-import { EntryPoint } from 'modject';
+import type { Article, Book } from '@fullstack/shared';
+import type { EntryPoint } from 'modject';
 import { DatabaseAPI } from './database';
-import { Book, Article } from '@fullstack/shared';
 
 const books: Book[] = [
   {

@@ -1,9 +1,9 @@
 export { createOrchestrator } from './orchestrator';
 export type {
-  SlotKey,
-  RunShell,
-  WithdrawShell,
   ContributeShell,
   EntryPoint,
   EntryPointOrchestrator,
+  RunShell,
+  SlotKey,
+  WithdrawShell,
 } from './types';

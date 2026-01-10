@@ -1,5 +1,5 @@
-import { EntryPoint } from 'modject';
 import { Router } from 'express';
+import type { EntryPoint } from 'modject';
 import { BackendRouterAPI } from './backend-router';
 
 export const BackendRouterEntryPoint: EntryPoint = {

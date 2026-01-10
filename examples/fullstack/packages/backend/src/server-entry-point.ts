@@ -1,8 +1,8 @@
-import { EntryPoint } from 'modject';
-import express from 'express';
 import cors from 'cors';
-import { ServerAPI } from './server';
+import express from 'express';
+import type { EntryPoint } from 'modject';
 import { BackendRouterAPI } from './backend-router';
+import { ServerAPI } from './server';
 
 export const ServerEntryPoint: EntryPoint = {
   name: 'Server Entry Point',

@@ -1,4 +1,4 @@
-import { EntryPoint } from 'modject';
+import type { EntryPoint } from 'modject';
 import { RouterAPI } from '../router';
 import { AboutPage } from './about-page';
 

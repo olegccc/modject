@@ -1,6 +1,6 @@
-import { EntryPoint } from 'modject';
+import type { PageInfo } from '@fullstack/shared';
+import type { EntryPoint } from 'modject';
 import { RouterAPI } from './router';
-import { PageInfo } from '@fullstack/shared';
 
 export const RouterEntryPoint: EntryPoint = {
   name: 'Router Entry Point',

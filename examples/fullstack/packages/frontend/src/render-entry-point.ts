@@ -1,8 +1,8 @@
-import { EntryPoint } from 'modject';
+import type { EntryPoint } from 'modject';
 import { createRoot } from 'react-dom/client';
+import { App } from './app';
 import { RenderAPI } from './render';
 import { RouterAPI } from './router';
-import { App } from './app';
 
 export const RenderEntryPoint: EntryPoint = {
   name: 'Render Entry Point',

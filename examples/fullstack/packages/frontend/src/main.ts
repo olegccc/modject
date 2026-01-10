@@ -1,12 +1,12 @@
 import { createOrchestrator } from 'modject';
 import './index.css';
-import { RouterEntryPoint } from './router-entry-point';
+import { AboutPageEntryPoint } from './pages/about-page-entry-point';
+import { ArticlesPageEntryPoint } from './pages/articles-page-entry-point';
 import { HomePageEntryPoint } from './pages/home-page-entry-point';
 import { SearchPageEntryPoint } from './pages/search-page-entry-point';
-import { ArticlesPageEntryPoint } from './pages/articles-page-entry-point';
-import { AboutPageEntryPoint } from './pages/about-page-entry-point';
-import { RenderEntryPoint } from './render-entry-point';
 import { RenderAPI } from './render';
+import { RenderEntryPoint } from './render-entry-point';
+import { RouterEntryPoint } from './router-entry-point';
 
 const orchestrator = createOrchestrator();
 

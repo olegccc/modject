@@ -1,5 +1,5 @@
-import { SlotKey } from 'modject';
-import { Book, Article } from '@fullstack/shared';
+import type { Article, Book } from '@fullstack/shared';
+import type { SlotKey } from 'modject';
 
 export interface DatabaseAPI {
   getBooks(): Book[];

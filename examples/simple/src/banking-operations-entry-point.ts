@@ -1,4 +1,4 @@
-import { EntryPoint, RunShell } from 'modject';
+import type { EntryPoint } from 'modject';
 import { AccountAPI } from './account';
 import { CustomerAPI } from './customer';
 import { TransactionAPI } from './transaction';

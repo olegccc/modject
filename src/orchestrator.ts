@@ -1,3 +1,4 @@
+import { createDependencyTree } from './dependency-tree';
 import type {
   ContributeShell,
   EntryPoint,
@@ -6,7 +7,6 @@ import type {
   SlotKey,
   WithdrawShell,
 } from './types';
-import { createDependencyTree, DependencyTree } from './dependency-tree';
 
 export const createOrchestrator = (): EntryPointOrchestrator => {
   const entryPoints: Map<string, EntryPoint> = new Map();
@@ -143,7 +143,7 @@ export const createOrchestrator = (): EntryPointOrchestrator => {
               `Slot ${key.name} is not declared as dependency by entry point ${entryPoint.name}`
             );
           }
-          return slotFactories.get(key.name)!() as T;
+          return slotFactories.get(key.name)?.() as T;
         },
       };
     };

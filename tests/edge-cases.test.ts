@@ -1,5 +1,5 @@
-import { createOrchestrator } from '../src/orchestrator';
 import { createDependencyTree } from '../src/dependency-tree';
+import { createOrchestrator } from '../src/orchestrator';
 import type { EntryPoint, SlotKey } from '../src/types';
 
 describe('Edge Cases and Error Paths', () => {
@@ -34,7 +34,6 @@ describe('Edge Cases and Error Paths', () => {
       expect(receivedValue).toBe('test-value');
     });
   });
-
 
   describe('Orchestrator - concurrent operation protection', () => {
     it('should throw error when adding entry points while starting', () => {
@@ -181,7 +180,7 @@ describe('Edge Cases and Error Paths', () => {
     it('should throw error when entry point does not exist during stop', () => {
       const orchestrator = createOrchestrator();
       const slot: SlotKey<string> = { name: 'slot1' };
-      
+
       orchestrator.addEntryPoints([
         {
           name: 'consumer',
@@ -194,7 +193,7 @@ describe('Edge Cases and Error Paths', () => {
           contribute: (api) => api.contribute(slot, () => 'value'),
         },
       ]);
-      
+
       orchestrator.startEntryPoints(['consumer', 'provider']);
       orchestrator.removeEntryPoints(['provider']);
 
