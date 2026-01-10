@@ -15,7 +15,7 @@ Inspired by [repluggable](https://github.com/wixplosives/repluggable), Modject o
 🧩 **Modular Architecture** - Build applications from independent, reusable modules  
 💉 **Dependency Injection** - Clean IoC container for managing dependencies  
 🎯 **Interface-Based** - Depend on contracts, not implementations  
-🪶 **Lightweight** - Small bundle size, maximum flexibility  
+🪶 **Lightweight** - ~4.3 KB minified (ESM), ~4.8 KB (CJS)  
 🌐 **Universal** - Works for frontend, backend, CLI, or any Node.js project  
 📦 **SOLID Principles** - Built-in support for clean architecture patterns  
 ✅ **Well Tested** - 100% test coverage with comprehensive test suite
