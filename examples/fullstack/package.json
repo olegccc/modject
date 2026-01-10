@@ -1,0 +1,21 @@
+{
+  "name": "modject-fullstack-example",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "yarn workspace @fullstack/shared build && yarn workspace @fullstack/backend build && yarn workspace @fullstack/frontend build",
+    "dev:backend": "yarn workspace @fullstack/backend dev",
+    "dev:frontend": "yarn workspace @fullstack/frontend dev",
+    "start:backend": "yarn workspace @fullstack/backend start"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

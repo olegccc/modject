@@ -1,0 +1,61 @@
+{
+  "name": "modject",
+  "version": "0.1.0",
+  "description": "A lightweight framework focusing on modularity and dependency injection",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/cjs/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/cjs/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "npm run build:cjs && npm run build:esm",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "prepublishOnly": "bun run build"
+  },
+  "keywords": [
+    "modularity",
+    "dependency-injection",
+    "ioc",
+    "di",
+    "inversion-of-control",
+    "modules"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olegccc/modject.git"
+  },
+  "bugs": {
+    "url": "https://github.com/olegccc/modject/issues"
+  },
+  "homepage": "https://github.com/olegccc/modject#readme",
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.11",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^25.0.5",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.6",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
