@@ -463,19 +463,19 @@ Modject is suitable for any JavaScript/TypeScript project:
 bun install
 
 # Run tests
-npm test
+bun test
 
 # Run tests with coverage
-npm run test:coverage
+bun run test:coverage
 
 # Build
-npm run build
+bun run build
 
 # Lint
-npm run lint
+bun run lint
 
 # Format
-npm run format
+bun run format
 ```
 
 ### Test Coverage
@@ -488,7 +488,7 @@ Modject maintains 100% test coverage to ensure reliability:
 - **100%** line coverage
 - **83** comprehensive tests covering core functionality, edge cases, and error paths
 
-Run `npm run test:coverage` to generate a detailed coverage report.
+Run `bun run test:coverage` to generate a detailed coverage report.
 
 ## License
 
