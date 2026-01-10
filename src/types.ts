@@ -1,7 +1,7 @@
 export interface SlotKey<T> {
   readonly name: string;
-  readonly public?: boolean;
-  readonly multi?: boolean;
+  readonly public?: boolean; // this field is not used in the current implementation
+  readonly multi?: boolean; // multi=true will create a new instance on each call
   readonly empty?: T; // Holds no value, only triggers type-checking of T
   readonly layer?: string;
 }

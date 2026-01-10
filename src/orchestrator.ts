@@ -30,6 +30,9 @@ export const createOrchestrator = (): EntryPointOrchestrator => {
   const getLayerLevel = (layer: string) => layers.indexOf(layer);
 
   const validateEntryPoint = (entryPoint: EntryPoint) => {
+    if (!entryPoint.name) {
+      throw new Error('Entry point must have a name');
+    }
     if (entryPoint.layer && !layers.includes(entryPoint.layer)) {
       throw new Error(`Layer ${entryPoint.layer} is not defined`);
     }

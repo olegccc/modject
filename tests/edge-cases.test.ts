@@ -3,6 +3,16 @@ import { createOrchestrator } from '../src/orchestrator';
 import type { EntryPoint, SlotKey } from '../src/types';
 
 describe('Edge Cases and Error Paths', () => {
+  describe('Orchestrator - entry point validation', () => {
+    it('should throw error when entry point has no name', () => {
+      const orchestrator = createOrchestrator();
+      
+      expect(() => orchestrator.addEntryPoints([{ name: '' } as EntryPoint])).toThrow(
+        'Entry point must have a name'
+      );
+    });
+  });
+
   describe('Orchestrator - finalRunShell', () => {
     it('should throw error when accessing non-contributed slot via onStarted callback', () => {
       const orchestrator = createOrchestrator();
