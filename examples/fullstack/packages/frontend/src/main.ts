@@ -19,6 +19,9 @@ orchestrator.addEntryPoints([
   RenderEntryPoint,
 ]);
 
+// notice that RouterEntryPoint is not specified here - it will be started automatically as it is required by other entry points
+// also notice that all page entry points are optional - excluding them will cause the pages to not be rendered,
+// and they will not appear in the navigation bar either
 orchestrator.startEntryPoints(
   [
     RenderEntryPoint.name,

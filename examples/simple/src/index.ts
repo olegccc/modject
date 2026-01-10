@@ -13,4 +13,5 @@ orchestrator.addEntryPoints([
   BankingOperationsEntryPoint,
 ]);
 
+// notice that only one entry point is started here - all other entry points will be started as BankingOperationsEntryPoint depends on them
 orchestrator.startEntryPoints('Banking Operations Entry Point');
