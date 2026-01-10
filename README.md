@@ -6,7 +6,7 @@ A lightweight, zero-dependency framework for building modular applications with 
 
 Modject helps you organize projects with a modular structure where components depend only on **interfaces**, not concrete implementations. This approach promotes clean architecture, maintainability, and testability across any project type.
 
-Inspired by [repluggable](https://github.com/wixplosives/repluggable), Modject offers a streamlined, framework-agnostic approach to modularity. While Repluggable excels at React/Redux applications, Modject focuses purely on modularity and dependency injection, making it suitable for **any** JavaScript/TypeScript project.
+Inspired by [repluggable](https://github.com/wix-incubator/repluggable), Modject offers a streamlined, framework-agnostic approach to modularity. While Repluggable excels at React/Redux applications, Modject focuses purely on modularity and dependency injection, making it suitable for **any** JavaScript/TypeScript project.
 
 ## Key Features
 
@@ -345,7 +345,7 @@ const LoggerEntryPoint: EntryPoint = {
 
 ### Open/Closed Principle (OCP)
 
-Interfaces are open for extension but closed for modification. Existing interfaces remain unchanged, but can be extended by deriving new interfaces and contributing them under new names.
+Modject supports OCP by allowing you to add new functionality through new entry points and APIs without modifying existing code. You can create new interfaces that extend existing ones and register them under new SlotKeys.
 
 ```typescript
 // Original interface remains unchanged
@@ -353,19 +353,19 @@ interface LoggerAPI {
   log(message: string): void;
 }
 
-// Extend by creating a new interface
+// Create an extended interface with additional functionality
 interface EnhancedLoggerAPI extends LoggerAPI {
   logWithLevel(level: string, message: string): void;
   getHistory(): string[];
 }
 
-// Contribute the enhanced interface under a new name
+// Register as a new API under a different SlotKey
 const EnhancedLoggerKey: SlotKey<EnhancedLoggerAPI> = { name: 'EnhancedLogger' };
 
-// New entry points can depend on the enhanced interface
+// New entry points can use the enhanced interface
 const NewFeatureEntryPoint: EntryPoint = {
   name: 'New Feature',
-  dependsOn: [EnhancedLoggerKey],  // Uses extended interface
+  dependsOn: [EnhancedLoggerKey],
   run(shell) {
     const logger = shell.get(EnhancedLoggerKey);
     logger.logWithLevel('INFO', 'Using enhanced functionality');
@@ -373,9 +373,11 @@ const NewFeatureEntryPoint: EntryPoint = {
 };
 ```
 
+Note: This approach creates a separate API rather than transparently enhancing the original. Existing consumers of `LoggerAPI` will continue using the original implementation.
+
 ### Liskov Substitution Principle (LSP)
 
-Entry points depend on interfaces (`SlotKey`), so implementations can be substituted without breaking consumers. Substitution is achieved by simply replacing one entry point with another in the `addEntryPoints` call.
+Entry points depend on interfaces (`SlotKey`), so implementations can be substituted without breaking consumers. Substitution is achieved at compile-time by choosing which entry point to include in the `addEntryPoints` call.
 
 ```typescript
 // Both implementations satisfy the same interface
@@ -463,7 +465,7 @@ Modject is suitable for any JavaScript/TypeScript project:
 bun install
 
 # Run tests
-bun test
+bun run test
 
 # Run tests with coverage
 bun run test:coverage
