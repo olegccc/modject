@@ -13,9 +13,11 @@
     }
   },
   "scripts": {
-    "build": "npm run build:cjs && npm run build:esm",
+    "build": "bun run build:cjs && bun run build:esm",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:esm": "tsc -p tsconfig.esm.json",
+    "build:check": "bun run build && bun run size",
+    "size": "bun run scripts/check-bundle-size.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -44,6 +46,7 @@
   "homepage": "https://github.com/olegccc/modject#readme",
   "files": [
     "dist",
+    "src",
     "LICENSE",
     "README.md"
   ],
