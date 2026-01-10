@@ -70,9 +70,6 @@ export const createOrchestrator = (): EntryPointOrchestrator => {
     if (entryPoints.size) {
       throw new Error('Cannot define layers after adding entry points');
     }
-    if (pendingStartEntryPoints.size || pendingStopEntryPoints.size) {
-      throw new Error('Cannot define layers when starting or stopping entry points');
-    }
     layers = layersToBe;
   };
 

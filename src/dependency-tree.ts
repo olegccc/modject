@@ -22,10 +22,8 @@ const checkCircularDependencies = (entryPoints: EntryPoint[]): string[] => {
       return;
     }
 
-    const ep = entryPointMap.get(epName);
-    if (!ep) {
-      return;
-    }
+    // biome-ignore lint/style/noNonNullAssertion: this just cannot happen
+    const ep = entryPointMap.get(epName)!;
 
     visiting.add(epName);
     path.push(epName);

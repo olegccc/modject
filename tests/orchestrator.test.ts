@@ -515,5 +515,96 @@ describe('Orchestrator', () => {
         orchestrator.startEntryPoints(['data-provider', 'logic-processor', 'ui-renderer'])
       ).not.toThrow();
     });
+
+    it('should allow dependencies on same layer', () => {
+      const orchestrator = createOrchestrator();
+      orchestrator.defineLayers(['layer1', 'layer2']);
+
+      const slot1: SlotKey<string> = { name: 'slot1', layer: 'layer1' };
+
+      orchestrator.addEntryPoints([
+        {
+          name: 'provider',
+          layer: 'layer1',
+          contributes: [slot1],
+        },
+        {
+          name: 'consumer',
+          layer: 'layer1',
+          dependsOn: [slot1],
+        },
+      ]);
+
+      expect(() => orchestrator.startEntryPoints(['provider', 'consumer'])).not.toThrow();
+    });
+
+    it('should allow dependencies without layer specified', () => {
+      const orchestrator = createOrchestrator();
+      orchestrator.defineLayers(['layer1']);
+
+      const slotNoLayer: SlotKey<string> = { name: 'slot1' };
+
+      orchestrator.addEntryPoints([
+        {
+          name: 'provider',
+          layer: 'layer1',
+          contributes: [slotNoLayer],
+        },
+        {
+          name: 'consumer',
+          layer: 'layer1',
+          dependsOn: [slotNoLayer],
+        },
+      ]);
+
+      expect(() => orchestrator.startEntryPoints(['provider', 'consumer'])).not.toThrow();
+    });
+
+    it('should stop entry point without contributes', () => {
+      const orchestrator = createOrchestrator();
+      const withdrawSpy = jest.fn();
+
+      orchestrator.addEntryPoints([
+        {
+          name: 'ep1',
+          run: jest.fn(),
+          withdraw: withdrawSpy,
+        },
+      ]);
+
+      orchestrator.startEntryPoints('ep1');
+      orchestrator.stopEntryPoints(['ep1']);
+
+      expect(withdrawSpy).toHaveBeenCalled();
+    });
+
+    it('should handle transitive stopping of dependencies', () => {
+      const orchestrator = createOrchestrator();
+      const slot: SlotKey<string> = { name: 'slot1' };
+      const withdrawCalls: string[] = [];
+
+      orchestrator.addEntryPoints([
+        {
+          name: 'provider',
+          contributes: [slot],
+          contribute: (api) => api.contribute(slot, () => 'value'),
+          withdraw: (api) => {
+            withdrawCalls.push('provider');
+            api.withdraw(slot);
+          },
+        },
+        {
+          name: 'consumer',
+          dependsOn: [slot],
+          run: jest.fn(),
+        },
+      ]);
+
+      orchestrator.startEntryPoints(['provider', 'consumer']);
+      orchestrator.stopEntryPoints(['consumer']);
+
+      expect(withdrawCalls).toContain('provider');
+      expect(orchestrator.getStartedEntryPoints()).toHaveLength(0);
+    });
   });
 });

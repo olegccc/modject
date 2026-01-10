@@ -260,22 +260,43 @@ describe('Edge Cases and Error Paths', () => {
     });
   });
 
-  describe('DependencyTree - addDependency circular check', () => {
-    it('should not trigger addDependency circular check in normal cases', () => {
+  describe('DependencyTree - duplicate dependencies', () => {
+    it('should throw error when entry point has duplicate slots in dependsOn', () => {
       const tree = createDependencyTree();
       const slot1: SlotKey<unknown> = { name: 'slot1' };
+
       const entryPoints: EntryPoint[] = [
         {
-          name: 'ep1',
+          name: 'provider',
           contributes: [slot1],
         },
         {
-          name: 'ep2',
-          dependsOn: [slot1],
+          name: 'consumer',
+          dependsOn: [slot1, slot1],
         },
       ];
 
-      expect(() => tree.buildTree(entryPoints)).not.toThrow();
+      expect(() => tree.buildTree(entryPoints)).toThrow(
+        'Circular dependency detected: consumer -> slot1'
+      );
+    });
+
+    it('should throw error when entry point has duplicate slots in contributes', () => {
+      const tree = createDependencyTree();
+      const slot1: SlotKey<unknown> = { name: 'slot1' };
+
+      const entryPoints: EntryPoint[] = [
+        {
+          name: 'provider',
+          contributes: [slot1, slot1],
+        },
+      ];
+
+      expect(() => tree.buildTree(entryPoints)).toThrow(
+        'Circular dependency detected: slot1 -> provider'
+      );
     });
   });
+
+
 });
