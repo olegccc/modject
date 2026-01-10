@@ -405,6 +405,7 @@ orchestrator.addEntryPoints([
   // FileLoggerEntryPoint,  // Or use file logger instead
   ApplicationEntryPoint,     // Consumer works with either
 ]);
+```
 
 ### Interface Segregation Principle (ISP)
 
