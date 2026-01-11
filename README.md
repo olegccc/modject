@@ -77,6 +77,8 @@ orchestrator.startEntryPoints('App Entry Point');
 // Output: [LOG] Application started!
 ```
 
+**Note:** The `logger` object returned by `shell.get(LoggerAPI)` is typed as `LoggerAPI` from TypeScript's perspective. This means TypeScript will enforce type safety - for example, calling `logger.log2('message')` would result in a compilation error since `log2` is not defined in the `LoggerAPI` interface.
+
 ## Core Concepts
 
 ### SlotKey - Typed API Contract
